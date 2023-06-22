@@ -5,18 +5,30 @@ using System.Xml.Linq;
 
 internal class Program
 {
+    static Random rand = new Random();
+    static void ADDLumber(string _name, int CountPancake, Queue<Lumberjack> myLumbejack, Lumberjack myLumber)
+    {
+        myLumber = new Lumberjack(_name);
+        for (int i = 0; i < CountPancake; i++)
+        {
+            int e = Enum.GetNames<EFlapjack>().Length;
+            myLumber.TakeFlapjack((EFlapjack)rand.Next(e));
+
+        }
+        myLumbejack.Enqueue(myLumber);
+    }
     private static void Main(string[] args)
     {
         string name;
         int pancakesCount;
-        Lumberjack myLumber;
-        Stack<Lumberjack> myLumbejack = new Stack<Lumberjack>();
-        Random rand = new Random();
+        Lumberjack myLumber = new Lumberjack("nn"); ;
+        Queue<Lumberjack> myLumbejack = new Queue<Lumberjack>();
+        
         Console.Write("Imie pierwszergo drwala: ");
         name = Console.ReadLine();
         Console.Write("Liczba nalenikow: ");
         int.TryParse(Console.ReadLine(), out pancakesCount);
-        ADDLumber(name, pancakesCount);
+        ADDLumber(name, pancakesCount, myLumbejack, myLumber);
         
         
 
@@ -27,7 +39,7 @@ internal class Program
             if (name == "") break;
             Console.Write("Liczba nalenikow: ");
             int.TryParse(Console.ReadLine(), out pancakesCount);
-            ADDLumber(name, pancakesCount);
+            ADDLumber(name, pancakesCount, myLumbejack, myLumber);
         }
         
         
@@ -35,17 +47,8 @@ internal class Program
         {
             lumb.EatFlapjacks();
         }
-        void ADDLumber(string _name, int CountPancake)
-        {
-            myLumber = new Lumberjack(_name);
-            for (int i = 0; i < CountPancake; i++)
-            {
-                int e = Enum.GetNames<EFlapjack>().Length;
-                myLumber.TakeFlapjack((EFlapjack)rand.Next(e));
-
-            }
-            myLumbejack.Push(myLumber);
-        }
+        myLumbejack.Clear();
+        
     }
     
 }
