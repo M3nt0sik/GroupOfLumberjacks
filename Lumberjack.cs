@@ -32,7 +32,12 @@ namespace GroupOfLumberjacks
         //method remove element from the stack
         public void EatFlapjacks()
         {
-            Console.WriteLine($"{Name} je {flapjackStack.Pop()} nalesnik");
+            foreach(EFlapjack f in flapjackStack)
+            {
+                Console.WriteLine($"{Name} je {f} nalesnik");
+            }
+            flapjackStack.Clear();
+                
         }
         //override method to beter understed when debug program
         public override string ToString()
